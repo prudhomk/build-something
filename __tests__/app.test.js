@@ -43,6 +43,20 @@ describe('demo routes', () => {
     expect(res.body).toEqual([gif1, gif2]);
   });
 
+  it('retrieves specific gif from table', async () => {
+    const targetGif = await Gif.insert({
+      id: expect.any(String),
+      url: expect.any(String),
+      title: expect.any(String),
+      image: expect.any(Object)
+    });
+
+    const res = await request(app)
+      .get(`/api/v1/gifs/${targetGif.id}`);
+      
+    expect(res.body).toEqual(targetGif);
+  });
+
   it('updates a gif from the table', async () => {
 
     const badGif = await Gif.insert({
