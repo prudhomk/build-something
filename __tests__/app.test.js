@@ -58,4 +58,18 @@ describe('demo routes', () => {
       .send(badGif);
     expect(res.body).toEqual(badGif);
   });
+
+  it('deletes a gif from table', async () => {
+    
+    const deadGif = await Gif.insert({
+      id: expect.any(String),
+      url: expect.any(String),
+      title: expect.any(String),
+      image: expect.any(Object)
+    });
+
+    const res = await request(app).delete(`/api/v1/gifs/${deadGif.id}`);
+
+    expect(res.body).toEqual(deadGif);
+  });
 });
