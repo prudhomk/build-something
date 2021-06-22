@@ -42,4 +42,20 @@ describe('demo routes', () => {
 
     expect(res.body).toEqual([gif1, gif2]);
   });
+
+  it('updates a gif from the table', async () => {
+
+    const badGif = await Gif.insert({
+      id: expect.any(String),
+      url: expect.any(String),
+      title: expect.any(String),
+      image: expect.any(Object)
+    });
+
+    badGif.title = 'Big Chungus';
+
+    const res = await request(app).put(`/api/v1/gifs/${badGif.id}`)
+      .send(badGif);
+    expect(res.body).toEqual(badGif);
+  });
 });
