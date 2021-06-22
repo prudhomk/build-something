@@ -10,47 +10,29 @@ describe('demo routes', () => {
   });
 
   const gif = {
-    url: 'https://giphy.com/gifs/cat-smoke-smoking-3o6Zt481isNVuQI1l6',
-    title: 'Cat Smoking GIF by sheepfilms',
+    url: 'https://giphy.com/gifs/planet-globe-joe-winograd-HRzhhyrs8n5JFyCTsv',
+    title: 'Op Art GIF by Joe Winograd',
     images: {
-      'original': {
-        'height': '250',
-        'width': '400',
-        'size': '3662773',
-        'url': 'https://media1.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif?cid=3f0609denlj9k1dmp3eudnl4h1pppz7svvmftuvikjldjdhf&rid=giphy.gif&ct=g',
-        'mp4_size': '772242',
-        'mp4': 'https://media1.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.mp4?cid=3f0609denlj9k1dmp3eudnl4h1pppz7svvmftuvikjldjdhf&rid=giphy.mp4&ct=g',
-        'webp_size': '992406',
-        'webp': 'https://media1.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.webp?cid=3f0609denlj9k1dmp3eudnl4h1pppz7svvmftuvikjldjdhf&rid=giphy.webp&ct=g',
-        'frames': '81',
-        'hash': '23c2bbc1d41e1376b8252ef4a6505bb2'
-      }
+      'hd': {
+        'height': '1400',
+        'mp4': 'https://media3.giphy.com/media/HRzhhyrs8n5JFyCTsv/giphy-hd.mp4?cid=e3b0c44280100a5538c01d0a5273334d0c0fb294cc9758dd&rid=giphy-hd.mp4&ct=g',
+        'mp4_size': '18317357',
+        'width': '1400'
+      },
     }
   };
+  
 
   it('creates a datapoint with a requested gif', async () => {
     const res = await request(app)
-      .post('/api/v1/gifs')
-      .send(gif);
+      .post('/api/v1/gifs');
+      
 
     expect(res.body).toEqual({ 
-      id: expect.any(Number),
-      url: 'https://giphy.com/gifs/cat-smoke-smoking-3o6Zt481isNVuQI1l6',
-      title: 'Cat Smoking GIF by sheepfilms',
-      images: {
-        'original': {
-          'height': '250',
-          'width': '400',
-          'size': '3662773',
-          'url': 'https://media1.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif?cid=3f0609denlj9k1dmp3eudnl4h1pppz7svvmftuvikjldjdhf&rid=giphy.gif&ct=g',
-          'mp4_size': '772242',
-          'mp4': 'https://media1.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.mp4?cid=3f0609denlj9k1dmp3eudnl4h1pppz7svvmftuvikjldjdhf&rid=giphy.mp4&ct=g',
-          'webp_size': '992406',
-          'webp': 'https://media1.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.webp?cid=3f0609denlj9k1dmp3eudnl4h1pppz7svvmftuvikjldjdhf&rid=giphy.webp&ct=g',
-          'frames': '81',
-          'hash': '23c2bbc1d41e1376b8252ef4a6505bb2'
-        },
-      }
+      id: expect.any(String),
+      url: expect.any(String),
+      title: expect.any(String),
+      image: expect.any(Object),
     });
   });
 });
